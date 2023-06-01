@@ -1,0 +1,35 @@
+import React from "react";
+import Fade from "react-reveal/Fade";
+import propType from "prop-types";
+import "./index.scss";
+
+const Numbering = ({style, className, data, current}) => {
+  const KeysOfData = Object.keys(data);
+  return (
+    <Fade>
+      <ol className={["stepper", className].join(" ")} style={style}>
+        {KeysOfData.map((list, index) => {
+          let isActive = list === current ? "active" : "";
+          if (index + 1 === KeysOfData.length) {
+            isActive = "";
+            return null;
+          }
+
+          return (
+            <li key={`list-${index}`} className={[isActive].join(" ")}>
+              {index + 1}
+            </li>
+          );
+        })}
+      </ol>
+    </Fade>
+  );
+};
+
+export default Numbering;
+
+Numbering.propType = {
+  className: propType.string,
+  data: propType.object,
+  current: propType.string,
+};
